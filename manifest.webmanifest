@@ -1,0 +1,10 @@
+{
+    "name": "NGO Environment",
+    "short_name": "NGO",
+    "start_url": "/frontend/ngo.html",
+    "display": "standalone",
+    "background_color": "#fff",
+    "theme_color": "#fff",
+    "orientation": "portrait-primary"
+
+}
