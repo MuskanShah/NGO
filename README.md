@@ -19,7 +19,7 @@ Our website will load image dynamically.
  
 ### Screenshots
 ##### 1. Home page
-![home](home.png)
+![home](home.PNG)
 ##### 2. login
 ![login](login.png)
 ##### 3. signup
