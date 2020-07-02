@@ -31,7 +31,7 @@ Our website will load image dynamically.
 ##### 6. Feedback
 ![feedback](feedback.PNG)
 ##### 7. Event
-![event](event.PNG)
+![upevent](upevent.PNG)
 ##### 8. Upcoming event Description
 ![detaildescriptionevent](detaildescriptionevent.PNG)
 
