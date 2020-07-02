@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="style.css">
+  <link href='https://fonts.googleapis.com/css?family=Alice' rel='stylesheet'>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body id="body" onload="start()">
+
+  <div class="navbar">
+    <div class="subnav" id="loginnav"><a href="http://localhost:5000/login">Login</a>
+      <a href="http://localhost:5000/login">Donate</a></div>
+    <div class="subnav" id="logoutnav">
+      <a href="http://localhost:3000/logout">Logout</a>
+      <a href="http://localhost:5000/dashboard">Donate</a>
+    </div>
+
+    <div class="subnav">
+      <button class="subnavbtn">About <i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="#contactus">Contact us</a><br>
+        <a href="#team">Team</a>
+      </div>
+    </div>
+
+    <div class="subnav">
+      <button class="subnavbtn">Activities <i class="fa fa-caret-down"></i></button>
+      <div class="subnav-content">
+        <a href="http://localhost:5000/event">Events</a><br>
+        <a href="http://localhost:5000/campaign">Camapaigns</a>
+      </div>
+    </div>
+    <a href="http://localhost:5000/ngo">Home</a>
+
+  </div>
+
+  <img class="background-tint" src="0.jpg" width=100% height="400">
+
+  <div class="open-divsearch" onclick="show()" onmouseout="hide()">
+    <input type="text" name="search" id="myInput" placeholder="search here" onkeyup="searchFunc()" style="width: 96%;"
+      onfocus="show()" autocomplete="off" class="open-search">
+    <button type="submit" onclick="redir()"><i class="fa fa-search"></i></button>
+    <div id="myTable" style="display:none;width: 97%;" onmouseover="show()" class="table"></div>
+  </div>
+
+
+  <p class="owner-detail" id="1">
+    <img class="owner" src="portfolio3.jpg"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
+    imperdiet, nulla et dictum interdum, nisi lorem egestas
+    odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, ultrices nec congue eget, auctor vitae
+    massa.
+    Fusce luctus vestibulum augue ut aliquet. Mauris ante ligula, facilisis sed ornare eu, lobortis in odio. Mauris ante
+    ligula, facilisis sed ornare eu, lobortis in odio. Praesent convallis urna a lacus interdum ut hendrerit risus
+    congue.
+    Nunc sagittis dictum nisi, sed ullamcorper ipsum dignissim ac. Fusce luctus vestibulum augue ut aliquet. Mauris ante
+    ligula, facilisis sed ornare eu, lobortis in odio. Mauris ante ligula, facilisis sed ornare eu, lobortis in
+    odio.Lorem
+    ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas
+    odio, vitae scelerisque enim ligula venenatis dolor. Maecenas nisl est, Lorem ipsum dolor sit amet, consectetur
+    adipiscing
+    elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio, vitae scelerisque enim ligula
+    venenatis
+    dolor. Maecenas nisl est, Praesent convallis urna a lacus interdum ut hendrerit risus congue. Nunc sagittis dictum
+    nisi,
+    sed ullamcorper ipsum dignissim ac. In at libero sed nunc venenatis imperdiet sed ornare turpis. Donec vitae dui
+    eget
+    tellus gravida venenatis. Integer fringilla congue eros non fermentum. Sed dapibus pulvinar nibh tempor porta. Cras
+    ac
+    leo purus. Mauris quis diam velit.</p>
+
+
+  <div class="achivements" id="awards"></div>
+
+  <div id="latestpublication">
+    <h1>Latest Publication</h1>
+
+  </div>
+
+  <div id="myModal" class="modal">
+
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Online Campaigns participation</p>
+      <input class="mid" type="text" id="email" placeholder="Email Id">
+      <br>
+      <br>
+      <button class="mid" id="support">I Support</button>
+    </div>
+
+  </div>
+
+  <script src="search.js"></script>
+  <script src="menu.js"></script>
+  <script>
+    var modal = document.getElementById("myModal");
+    var support = document.getElementById("support");
+
+    var span = document.getElementsByClassName("close")[0];
+
+    function popup() {
+      modal.style.display = "block";
+    }
+    support.onclick = function () {
+
+      var flag = checkvalue();
+      if (flag == "true") {
+
+        var data = {
+          email: document.getElementById("email").value,
+        }
+        console.log(data);
+        fetch("http://localhost:3000/support", {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+
+        })
+          .then((response) => {
+            return response.text();
+          })
+          .then((mytext) => {
+            if (mytext == "done") {
+              modal.style.display = "none";
+            }
+          })
+
+          .catch(function () {
+            console.log("error");
+          });
+
+
+      }
+    }
+
+
+
+    function checkvalue() {
+      var email = document.getElementById("email");
+      var flag = "false";
+      if (email.value) {
+        flag = "true";
+
+      }
+      else {
+
+        alert('Enter email to support!');
+      }
+      return flag;
+
+    }
+
+
+
+    span.onclick = function () {
+      modal.style.display = "none";
+    }
+
+
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    function showarticles() {
+      const d = document.getElementById("latestpublication");
+      fetch("http://localhost:3000/recentarticles", {
+
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((articles) => {
+          const a = document.createElement('a');
+          a.setAttribute("href", "http://localhost:5000/articles");
+          a.innerHTML = "View More";
+          articles.forEach(function (article) {
+            const link = document.createElement('a');
+            link.setAttribute("href", "http://localhost:5000/article?" + article.title);
+            const div = document.createElement('div');
+            const img = document.createElement('img');
+            const h = document.createElement('h3');
+
+            div.setAttribute("class", "publication");
+            img.setAttribute("class", "leftpublication");
+            img.setAttribute("src", article.image);
+
+            h.innerHTML = article.title;
+            div.appendChild(img);
+            div.appendChild(h);
+            link.appendChild(div);
+            d.appendChild(link);
+          })
+          d.appendChild(a);
+
+        })
+        .catch(function () {
+          console.log("error");
+        });
+    }
+
+
+    function showawards() {
+
+      const a = document.getElementById("awards");
+      fetch("http://localhost:3000/awards", {
+
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((awards) => {
+          awards.forEach(function (award) {
+            const f = document.createElement('figure');
+            const fc = document.createElement('figcaption');
+            const img = document.createElement('img');
+            fc.innerHTML = award.item;
+            img.setAttribute("class", "award");
+            img.setAttribute("src", award.image);
+            f.appendChild(img);
+            f.appendChild(fc);
+            a.appendChild(f);
+          })
+
+        })
+        .catch(function () {
+          console.log("error");
+        });
+    }
+
+    function start() {
+      load();
+      showawards();
+      showarticles();
+      popup();
+      menu();
+    }
+
+  </script>
+
+  <footer class="footer">
+    <a href="#">fb</i></a>
+    <a href="#">pintrest</i></a>
+    <a href="#">twitter</i></a>
+    <a href="#">flickr</i></a>
+    <a href="#">linkedin</i></a>
+    <p class="">
+      Powered by <a href="#" target="_blank">@</a>
+    </p>
+  </footer>
+</body>
+
+</html>
