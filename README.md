@@ -21,19 +21,19 @@ Our website will load image dynamically.
 ##### 1. Home page
 ![home](home.PNG)
 ##### 2. login
-![login](login.png)
+![login](login.PNG)
 ##### 3. signup
-![signup](signup.png)
+![signup](signup.PNG)
 ##### 4. About article
-![article](article.png)
+![article](article.PNG)
 ##### 5. Search bar
-![search](search.png)
+![search](search.PNG)
 ##### 6. Feedback
-![feedback](feedback.png)
+![feedback](feedback.PNG)
 ##### 7. Event
-![event](event.png)
+![event](event.PNG)
 ##### 8. Upcoming event Description
-![detaildescriptionevent](detaildescriptionevent.png)
+![detaildescriptionevent](detaildescriptionevent.PNG)
 
 
 
